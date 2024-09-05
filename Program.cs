@@ -9,22 +9,26 @@ var configuration = new ConfigurationBuilder()
 var action = true;
 do
 {
-    // Browser Select
-    Console.WriteLine("Which browser would you like to use?");
-    Console.WriteLine();
-    Console.WriteLine($"0 - Blisk");
-    Console.WriteLine($"1 - Opera");
-
-    var browserIndexText = Console.ReadLine();
-    if (!int.TryParse(browserIndexText, out var browserIndex))
+    var selectedBrowser = configuration[$"Browser:Default"];
+    if (selectedBrowser == null)
     {
-        Console.Clear();
-        Console.WriteLine("Please enter only number of browser!");
+        // Browser Select
+        Console.WriteLine("Which browser would you like to use?");
         Console.WriteLine();
-        continue;
-    }
+        Console.WriteLine($"0 - Blisk");
+        Console.WriteLine($"1 - Opera");
 
-    var selectedBrowser = browserIndex == 0 ? "Blisk" : "Opera";
+        var browserIndexText = Console.ReadLine();
+        if (!int.TryParse(browserIndexText, out var browserIndex))
+        {
+            Console.Clear();
+            Console.WriteLine("Please enter only number of browser!");
+            Console.WriteLine();
+            continue;
+        }
+
+        selectedBrowser = browserIndex == 0 ? "Blisk" : "Opera";
+    }
 
     var browserPathConfig = configuration[$"Browser:{selectedBrowser}"]
         ?? throw new NullReferenceException("Browser program path not found!");
