@@ -44,7 +44,6 @@ do
     Console.WriteLine();
 
     Console.WriteLine($"0 - Create new one!");
-    Console.WriteLine($"1 - Default");
 
     // Check exists profiles
     var profiles = Array.Empty<DirectoryInfo>();
@@ -52,7 +51,7 @@ do
     {
         var profileDirectory = new DirectoryInfo(profilePath);
         profiles = profileDirectory.GetDirectories()
-            .OrderBy(x => x.CreationTime)
+            .OrderBy(x => x.Name)
             .ToArray();
         for (int i = 0; i < profiles.Length; i++)
         {
@@ -70,18 +69,11 @@ do
         continue;
     }
 
-    // Open browser with default profile
-    if (index == 1)
-    {
-        action = RunBrowser(browserPathConfig);
-        continue;
-    }
-
     // Create new profile
     if (index == 0)
     {
         Console.Clear();
-        Console.WriteLine("Please enter the browser name.");
+        Console.WriteLine("Please enter the browser name. Example:nextofuture.web.com");
         var browserName = Console.ReadLine()?.Trim()?.ToLower();
         if (string.IsNullOrEmpty(browserName))
         {
