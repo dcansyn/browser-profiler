@@ -73,7 +73,7 @@ do
     if (index == 0)
     {
         Console.Clear();
-        Console.WriteLine("Please enter the browser name. Example:nextofuture.web.com");
+        Console.WriteLine("Please enter the browser name. Example:tenant.application.com");
         var browserName = Console.ReadLine()?.Trim()?.ToLower();
         if (string.IsNullOrEmpty(browserName))
         {
